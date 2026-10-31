@@ -14,7 +14,7 @@ with open("requirements.txt", "r", encoding="utf-8") as fh:
 setup(
     name="ascii-telescope",
     version="1.0.0",
-    author="ptxxdxxd",
+    author="Chris Vickers",
     description="Real-time solar observations in ASCII art",
     long_description=long_description,
     long_description_content_type="text/markdown",
