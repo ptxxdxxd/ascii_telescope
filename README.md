@@ -1,127 +1,84 @@
-# ascii_telescope
-Live solar telescope in your terminal using ASCII art and NASA SDO data  Transform NASA solar images into beautiful terminal ASCII art in real-time  Terminal-based solar observatory streaming live ASCII art from space  🔴 Watch the Sun live: NASA SDO → ASCII art in your terminal
-# 🌞 Neural ASCII Telescope
+# ASCII Telescope
 
-Real-time solar observations in your terminal using ASCII art. Watch the Sun live from NASA's Solar Dynamics Observatory (SDO) without leaving your command line!
+Watch the Sun in your terminal. ASCII Telescope downloads the latest public solar images from NASA and NOAA and redraws them as ASCII art, refreshing every five minutes.
 
-![Demo](demo.gif)
+The frame layout looks like this:
 
-## Features
+```
+=== ASCII TELESCOPE - LIVE SOLAR OBSERVATION ===
+Source: NASA SDO HMI Continuum
+============================================================
+<80 x 24 ASCII rendering of the solar disk>
+============================================================
+Updated: <time> UTC
+Next refresh in 300 seconds
+```
 
-- 🔴 **Live Solar Data** - Streams real-time images from NASA SDO
-- 🎨 **ASCII Art Conversion** - Converts solar images to beautiful terminal art  
-- 🌐 **Multiple Sources** - Automatic fallback between NASA and NOAA data feeds
-- ⚡ **Lightweight** - Zero-cost monitoring, runs anywhere Python does
-- 🛡️ **Robust** - Handles network failures and continues streaming
-- 🎯 **Focus Mode** - Crops to central solar disk, avoiding limb artifacts
+## How it works
 
-## Quick Start
+1. **Fetch.** Tries each image source in order and uses the first one that answers:
+   - NASA SDO HMI Continuum (visible-light solar surface)
+   - NASA SDO HMI Magnetogram (magnetic field)
+   - NOAA GOES SUVI 171 (extreme ultraviolet, fallback)
+2. **Prepare.** Converts the image to grayscale and crops it to a centered square.
+3. **Convert.** Resizes it to 80 x 24 and maps each pixel's brightness to one of ten characters, from ` ` (dark) to `@` (bright).
+4. **Display.** Clears the terminal, prints the frame with its source and time, and waits for the next refresh. If every source fails it retries after a minute.
+
+## Quick start
+
+Requires Python 3.9 or newer.
 
 ```bash
-# Clone the repository
-git clone https://github.com/yourusername/neural-ascii-telescope.git
-cd neural-ascii-telescope
-
-# Install dependencies
+git clone https://github.com/ptxxdxxd/ascii_telescope.git
+cd ascii_telescope
 pip install -r requirements.txt
-
-# Launch the telescope
-python telescope.py
+python ascii_telescope.py
 ```
 
-## Installation
+Press `Ctrl+C` to stop.
 
-### Requirements
-- Python 3.7+
-- Terminal with at least 80x24 character display
+## Two versions
 
-### Dependencies
-```bash
-pip install opencv-python numpy requests pillow
-```
+| File | Image sources | Extra |
+| --- | --- | --- |
+| `ascii_telescope.py` | NASA SDO HMI Continuum, SDO HMI Magnetogram, NOAA GOES SUVI 171 | |
+| `v2.py` | SOHO EIT 195, 171 and 304, then NASA SDO HMI Continuum | Saves each original image to `solar_photos/` with a timestamp |
 
-Or use the requirements file:
-```bash
-pip install -r requirements.txt
-```
+Run v2 with `python v2.py`. Set `SAVE_PHOTOS = False` at the top of the file to turn off image saving.
 
-## Usage
+## Configuration
 
-### Basic Usage
-```bash
-python telescope.py
-```
+Edit the constants at the top of either script:
 
-### Configuration
-Edit the configuration section in `telescope.py` to customize:
+- `REFRESH_SEC`: seconds between updates (default 300). Please keep this polite to NASA and NOAA servers.
+- `WIDTH` and `HEIGHT`: size of the ASCII frame (default 80 x 24).
+- `ASCII_CHARS`: the brightness ramp, darkest first (default `" .:-=+*#%@"`).
+- `SOURCES`: the list of image URLs to try, in order.
 
-- `REFRESH_SEC` - Update interval (default: 300 seconds)
-- `WIDTH` / `HEIGHT` - ASCII art dimensions (default: 80x24)
-- `ASCII_CHARS` - Character gradient for brightness mapping
+## Tips
 
-## Data Sources
+- Use a terminal at least 80 x 24 with a monospace font.
+- Dark terminal themes make the solar disk easier to read.
 
-The telescope automatically tries multiple sources for maximum reliability:
+## Dependencies
 
-1. **NASA SDO HMI Continuum** - High-resolution solar surface images
-2. **NASA SDO HMI Magnetogram** - Magnetic field visualization  
-3. **NOAA Space Weather** - Backup solar imagery
+`opencv-python`, `numpy`, `requests` and `Pillow` (see `requirements.txt`).
 
-## How It Works
+## Data credits
 
-1. **Fetch** - Downloads latest solar images from NASA/NOAA APIs
-2. **Process** - Crops to central disk and normalizes brightness
-3. **Convert** - Maps pixel intensities to ASCII characters
-4. **Display** - Renders live solar activity in your terminal
+Solar imagery is public data from:
 
-## Solar Features You'll See
+- [NASA Solar Dynamics Observatory](https://sdo.gsfc.nasa.gov/)
+- [SOHO](https://soho.nascom.nasa.gov/), a mission of ESA and NASA
+- [NOAA Space Weather Prediction Center](https://www.swpc.noaa.gov/)
 
-- 🔴 **Sunspots** - Dark regions of intense magnetic activity
-- ⚡ **Solar Granulation** - Convective cells on the solar surface
-- 🌊 **Plasma Flows** - Dynamic movement of solar material
-- 💥 **Active Regions** - Bright areas of magnetic complexity
+## Ideas
 
-## Troubleshooting
-
-### Network Issues
-The telescope automatically retries failed connections and switches between data sources.
-
-### Display Problems
-- Ensure terminal is at least 80x24 characters
-- Use a monospace font for best results
-- Try adjusting terminal contrast/brightness
-
-### Performance
-- Default 5-minute refresh balances data freshness with server load
-- Reduce `REFRESH_SEC` for faster updates (be respectful to NASA servers!)
-
-## Contributing
-
-Contributions welcome! Ideas for enhancements:
-
-- [ ] Color support for different solar features
-- [ ] Historical image playback
-- [ ] Solar flare detection alerts
-- [ ] Multiple wavelength support (UV, X-ray)
-- [ ] Export ASCII frames to files
-- [ ] Web interface version
-
-## Data Credits
-
-Solar imagery courtesy of:
-- **NASA Solar Dynamics Observatory (SDO)** - [sdo.gsfc.nasa.gov](https://sdo.gsfc.nasa.gov)
-- **NOAA Space Weather Prediction Center** - [spaceweather.gov](https://spaceweather.gov)
+- Color output for different wavelengths
+- Command-line flags instead of editing constants
+- Saving ASCII frames to text files
+- Merging `v2.py` into the main script as an option
 
 ## License
 
-MIT License - feel free to fork, modify, and share!
-
-## Astronomy Links
-
-- [Solar Dynamics Observatory](https://sdo.gsfc.nasa.gov/) - NASA's premier solar observatory
-- [Space Weather Live](https://spaceweatherlive.com/) - Real-time space weather data
-- [SOHO Solar Images](https://soho.esac.esa.int/data/) - ESA/NASA solar observatory
-
----
-
-*"The Sun, with all those planets revolving around it and dependent on it, can still ripen a bunch of grapes as if it had nothing else in the universe to do."* - Galileo Galilei
+MIT. See [License.txt](License.txt).
