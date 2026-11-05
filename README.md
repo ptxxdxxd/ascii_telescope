@@ -1,5 +1,7 @@
 # ASCII Telescope
 
+[![tests](https://github.com/ptxxdxxd/ascii_telescope/actions/workflows/tests.yml/badge.svg)](https://github.com/ptxxdxxd/ascii_telescope/actions/workflows/tests.yml)
+
 Watch the Sun in your terminal. ASCII Telescope downloads the latest public solar images from NASA and NOAA and redraws them as ASCII art, refreshing every five minutes.
 
 The frame layout looks like this:
@@ -62,7 +64,16 @@ Edit the constants at the top of either script:
 
 ## Dependencies
 
-`opencv-python`, `numpy`, `requests` and `Pillow` (see `requirements.txt`).
+`opencv-python-headless`, `numpy`, `requests` and `Pillow` (see `requirements.txt`). The headless OpenCV build is enough, since the scripts only resize and save images and never open a window.
+
+## Tests
+
+```bash
+pip install -r requirements.txt pytest
+pytest
+```
+
+The tests run offline. They fake the image sources to check the fallback order, the square crop and that a corrupt image is skipped, and they check the ASCII frame's size and brightness mapping. GitHub Actions runs them on Python 3.9, 3.11 and 3.13 for every pull request. `v2.py` is only byte-compiled in CI, not tested.
 
 ## Data credits
 
