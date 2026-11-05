@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """
-Neural ASCII Telescope
-Real-time solar observations in ASCII art
+ASCII Telescope, v2
+Real-time solar observations in ASCII art, saving each source image
 
-Display live solar images from NASA's Solar Dynamics Observatory
-directly in your terminal using ASCII character mapping.
+Displays the latest SOHO EIT images (195, 171 and 304 angstrom), falling back
+to NASA SDO HMI, and saves each original image to solar_photos/.
 
-Usage: python telescope.py
+Usage: python v2.py
 """
 
 import io
@@ -186,7 +186,7 @@ def image_to_ascii(image: np.ndarray) -> str:
 
 def run_stream():
     """Main streaming loop"""
-    print("=== Neural ASCII Telescope ===")
+    print("=== ASCII Telescope v2 ===")
     print("Displaying live solar observations from multiple sources")
     if SAVE_PHOTOS:
         print(f"Original photos will be saved to: {PHOTOS_DIR}/")
@@ -209,7 +209,7 @@ def run_stream():
 
                 # Clear screen and display
                 clear_screen()
-                print("=== NEURAL ASCII TELESCOPE - LIVE SOLAR OBSERVATION ===")
+                print("=== ASCII TELESCOPE - LIVE SOLAR OBSERVATION ===")
                 print(f"Source: {current_source}")
                 if saved_path:
                     print(f"Photo saved: {os.path.basename(saved_path)}")

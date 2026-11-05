@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """
-Neural ASCII Telescope
+ASCII Telescope
 Real-time solar observations in ASCII art
 
-Display live solar images from NASA's Solar Dynamics Observatory
-directly in your terminal using ASCII character mapping.
+Display the latest solar images from NASA's Solar Dynamics Observatory
+(with a NOAA GOES fallback) in your terminal using ASCII character mapping.
 
-Usage: python telescope.py
+Usage: python ascii_telescope.py
 """
 
 import io
@@ -32,7 +32,7 @@ SOURCES = [
         'type': 'jpg'
     },
     {
-        'name': 'SpaceWeatherLive HMI',
+        'name': 'NOAA GOES SUVI 171',
         'url': 'https://services.swpc.noaa.gov/images/animations/suvi/primary/171/latest.png',
         'type': 'png'
     }
@@ -133,7 +133,7 @@ def image_to_ascii(image: np.ndarray) -> str:
 
 def run_stream():
     """Main streaming loop"""
-    print("=== Neural ASCII Telescope ===")
+    print("=== ASCII Telescope ===")
     print("Displaying live solar observations from multiple sources")
     print("Press Ctrl+C to exit\n")
     
@@ -151,7 +151,7 @@ def run_stream():
                 
                 # Clear screen and display
                 clear_screen()
-                print("=== NEURAL ASCII TELESCOPE - LIVE SOLAR OBSERVATION ===")
+                print("=== ASCII TELESCOPE - LIVE SOLAR OBSERVATION ===")
                 print(f"Source: {current_source}")
                 print("=" * 60)
                 print(ascii_art)

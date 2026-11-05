@@ -1,127 +1,79 @@
-Contributing to Neural ASCII Telescope
-Thank you for your interest in contributing! This project welcomes contributions from developers, astronomers, and space enthusiasts.
-Getting Started
+# Contributing to ASCII Telescope
 
-Fork the repository on GitHub
-Clone your fork locally
-Create a new branch for your feature/fix
-Make your changes
-Test thoroughly
-Submit a pull request
+Thanks for your interest. Contributions from developers, astronomers and space fans are welcome.
 
-Development Setup
-bash# Clone your fork
-git clone https://github.com/yourusername/neural-ascii-telescope.git
-cd neural-ascii-telescope
+## Getting started
 
-# Create virtual environment
+1. Fork the repository on GitHub.
+2. Clone your fork and create a branch for your change.
+3. Make your changes and test them.
+4. Open a pull request.
+
+## Development setup
+
+```bash
+git clone https://github.com/<your-username>/ascii_telescope.git
+cd ascii_telescope
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
-
-# Install dependencies
 pip install -r requirements.txt
+python ascii_telescope.py
+```
 
-# Run the telescope
-python telescope.py
-Code Style
+## Code style
 
-Follow PEP 8 Python style guidelines
-Use meaningful variable names
-Add docstrings to functions
-Keep functions focused and small
-Handle errors gracefully
+- Follow PEP 8.
+- Use meaningful names and add docstrings to functions.
+- Keep functions small and focused.
+- Handle network and image errors gracefully.
 
-Feature Ideas
-High Priority
+## Feature ideas
 
- Color support for different solar features
- Configuration file support
- Better error messages and user feedback
- Performance optimizations
+High priority:
 
-Medium Priority
+- Color support for different solar features
+- Configuration file or command-line flags
+- Clearer error messages
 
- Historical image playback mode
- Multiple wavelength support (171Å, 193Å, 211Å)
- Solar flare detection and alerts
- Export frames to image files
+Medium priority:
 
-Low Priority
+- Historical image playback
+- More wavelengths (171, 193, 211 angstrom)
+- Solar flare alerts
+- Exporting frames to files
 
- Web interface version
- Real-time solar weather data overlay
- Interactive controls (zoom, pan)
- Sound alerts for solar events
+Low priority:
 
-Data Sources
-When adding new data sources, ensure:
+- A web version
+- Solar weather data overlay
+- Interactive zoom and pan
 
-Images are publicly available
-Proper attribution is included
-Error handling for source failures
-Consistent image format handling
+## Adding data sources
 
-Testing
-Before submitting:
+- Use only publicly available images.
+- Add proper attribution to the README.
+- Handle failures so the telescope falls back to the next source.
+- Keep image handling consistent with the existing sources.
 
-Test with different terminal sizes
-Verify network error handling
-Check memory usage during long runs
-Test on different operating systems if possible
+## Before you submit
 
-Submitting Changes
+- Run the telescope through at least one full refresh cycle.
+- Test network failures and bad image data.
+- Try different terminal sizes.
+- Update the README and `requirements.txt` if you add features or dependencies.
+- Write clear commit messages, for example `Add: NOAA SUVI 304 source` or `Fix: handle corrupted image data`.
 
-Create descriptive commit messages
-Add: New NOAA solar data source
-Fix: Handle corrupted image data gracefully  
-Update: Improve ASCII character mapping
+## Reporting issues
 
-Update documentation
+Include your Python version, operating system, terminal type and size, the full error traceback and steps to reproduce.
 
-Update README.md if adding features
-Add docstrings to new functions
-Update requirements.txt if adding dependencies
+## Background reading
 
+- **SDO (Solar Dynamics Observatory):** NASA's solar observation mission.
+- **HMI (Helioseismic and Magnetic Imager):** the SDO instrument behind the continuum and magnetogram images.
+- **Sunspots:** dark regions of intense magnetic activity.
+- **Solar flares:** sudden releases of magnetic energy.
 
-Test thoroughly
+## Code of conduct
 
-Run the telescope for at least one full cycle
-Test error conditions (network failures, bad data)
-Verify ASCII output quality
-
-
-
-Issue Reporting
-When reporting issues, include:
-
-Python version
-Operating system
-Terminal type/size
-Error messages (full traceback)
-Steps to reproduce
-
-Astronomy Knowledge
-While astronomy knowledge isn't required, understanding these concepts helps:
-
-Solar Dynamics Observatory (SDO) - NASA's solar observation mission
-HMI (Helioseismic and Magnetic Imager) - Instrument measuring solar magnetic fields
-Solar granulation - Convective cells visible on solar surface
-Sunspots - Dark regions of intense magnetic activity
-Solar flares - Explosive releases of magnetic energy
-
-Code of Conduct
-
-Be respectful and inclusive
-Focus on constructive feedback
-Help others learn and contribute
-Follow scientific accuracy when possible
-
-Questions?
-Feel free to open an issue for:
-
-Feature requests
-Bug reports
-General questions
-Astronomy discussions
-
-Happy stargazing! 🌞
+Be respectful, keep feedback constructive and help others learn.
