@@ -28,7 +28,7 @@ Next refresh in 300 seconds
 
 ## Quick start
 
-Requires Python 3.9 or newer.
+Requires Python 3.10 or newer.
 
 ```bash
 git clone https://github.com/ptxxdxxd/ascii_telescope.git
@@ -73,7 +73,7 @@ pip install -r requirements.txt pytest
 pytest
 ```
 
-The tests run offline. They fake the image sources to check the fallback order, the square crop and that a corrupt image is skipped, and they check the ASCII frame's size and brightness mapping. GitHub Actions runs them on Python 3.9, 3.11 and 3.13 for every pull request. `v2.py` is only byte-compiled in CI, not tested.
+The tests run offline. They fake the image sources to check the fallback order, the square crop and that a corrupt image is skipped, and they check the ASCII frame's size and brightness mapping. GitHub Actions runs them on Python 3.10 to 3.13 for every pull request. `v2.py` is only byte-compiled in CI, not tested.
 
 ## Data credits
 
